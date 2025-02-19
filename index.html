@@ -28,18 +28,19 @@
             color: Black;
             border-radius: 10px;
             font-size: 2.0vw; /* Tamaño de fuente responsive */
+            display: none; /* Ocultar cuadros de texto en la página principal */
         }
         .date-box {
-            bottom: 80px; /* Ajusta la posición vertical */
-            left: 60px;
+            bottom: 10vh; /* Ajusta la posición vertical */
+            left: 5vw; /* Ajusta la posición horizontal */
         }
         .additional-box {
-            bottom: 25px; /* Posición debajo de la fecha */
-            left: 20px;
+            bottom: 5vh; /* Posición debajo de la fecha */
+            left: 2vw; /* Ajusta la posición horizontal */
         }
         .waiting-box {
-            bottom: 70px;
-            right: 60px;
+            bottom: 10vh;
+            right: 5vw;
             animation: blink 3s infinite;
         }
         @keyframes blink {
@@ -50,50 +51,56 @@
                 opacity: 0;
             }
         }
-
         /* Estilo para los cuadros desplegables */
         .menu {
             position: absolute;
-            top: 10px;
-            left: 10px;
             z-index: 2;
-            padding: 3px;
-            font-size: 1.5vw;
+            padding: 0.5vw;
+            font-size: 1.0vw;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.8);
+            width: 20vw; /* Ancho relativo */
+        }
+        .menu-title {
+            position: absolute;
+            font-size: 1.0vw;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5vw;
+            border-radius: 5px;
         }
         #main-select-1 {
-            top: 10px;
-            left: 10px;
+            top: 12vh;
+            left: 5vw;
         }
         #secondary-select-1 {
-            top: 50px;
-            left: 10px;
+            top: 19vh;
+            left: 5vw;
         }
         #main-select-2 {
-            top: 10px;
-            left: 400px;
+            top: 32vh;
+            left: 5vw;
         }
         #secondary-select-2 {
-            top: 50px;
-            left: 400px;
+            top: 39vh;
+            left: 5vw;
         }
     </style>
 </head>
 <body>
     <!-- Primer conjunto de menús -->
+    <div class="menu-title" style="top: 5vh; left: 12vw;">Maestrías</div>
     <select id="main-select-1" class="menu">
         <option value="">Selecciona una opción</option>
         <option value="MDA-A">MDA-A</option>
         <option value="MDA-B">MDA-B</option>
         <option value="MJA-B">MJA-B</option>
     </select>
-
     <select id="secondary-select-1" class="menu" disabled>
         <option value="">Selecciona una opción</option>
     </select>
-
     <!-- Segundo conjunto de menús -->
+    <div class="menu-title" style="top: 26vh; left: 10.5vw;">Especialidades</div>
     <select id="main-select-2" class="menu">
         <option value="">Selecciona una opción</option>
         <option value="EDH-A">EDH-A</option>
@@ -101,12 +108,11 @@
         <option value="ERA-A">ERA-A</option>
         <option value="ERA-B">ERA-B</option>
     </select>
-
     <select id="secondary-select-2" class="menu" disabled>
         <option value="">Selecciona una opción</option>
     </select>
-
     <div class="container">
+        <!-- Los cuadros de texto están ocultos en la página principal -->
         <div class="text-box date-box" id="date-box"></div>
         <div class="text-box additional-box" id="additional-box">17:00 a 20:00 hrs.</div> 
         <div class="text-box waiting-box">Comenzamos en breve...</div>
@@ -115,41 +121,38 @@
         // Datos para los menús
         const menuOptions1 = {
             "MDA-A": [
-                { value: "MDA24B_RPE.png", text: "Derecho Procesal", label: "Derecho Procesal" },
-                { value: "seguridad_social.jpg", text: "Seguridad Social", label: "Seguridad Social" }
+                { value: "MDA24B_RPE.png", text: "17:00 a 20:00 hrs.", label: "Derecho Procesal" },
+                { value: "seguridad_social.jpg", text: "17:00 a 20:00 hrs.", label: "Seguridad Social" }
             ],
             "MDA-B": [
-                { value: "responsabilidad_patrimonial.jpg", text: "Responsabilidad Patrimonial", label: "Responsabilidad Patrimonial" },
-                { value: "camacho.jpg", text: "Seguridad Social", label: "Seguridad Social" }
+                { value: "responsabilidad_patrimonial.jpg", text: "17:00 a 20:00 hrs.", label: "Responsabilidad Patrimonial" },
+                { value: "camacho.jpg", text: "17:00 a 20:00 hrs.", label: "Seguridad Social" }
             ],
             "MJA-B": [
-                { value: "derecho_procesal.jpg", text: "Derecho Procesal", label: "Derecho Procesal" },
-                { value: "informatica_juridica.jpg", text: "Informática Jurídica", label: "Informática Jurídica" }
+                { value: "derecho_procesal.jpg", text: "07:00 a 10:00 hrs.", label: "Derecho Procesal" },
+                { value: "informatica_juridica.jpg", text: "07:00 a 10:00 hrs.", label: "Informática Jurídica" }
             ]
         };
-
         const menuOptions2 = {
             "EDH-A": [
-                { value: "taller_redaccion.jpg", text: "Taller de Redacción", label: "Taller de Redacción" },
-                { value: "seminario_casos.jpg", text: "Seminario Casos Prácticos", label: "Seminario Casos Prácticos" }
+                { value: "taller_redaccion.jpg", text: "17:00 a 20:00 hrs.", label: "Taller de Redacción" },
+                { value: "seminario_casos.jpg", text: "17:00 a 20:00 hrs.", label: "Seminario Casos Prácticos" }
             ],
             "EDH-B": [
-                { value: "argumentacion_juridica.jpg", text: "Argumentación Jurídica", label: "Argumentación Jurídica" },
-                { value: "sistema_no_jurisdiccional.jpg", text: "Sistema no Jurisdiccional", label: "Sistema no Jurisdiccional" }
+                { value: "argumentacion_juridica.jpg", text: "17:00 a 20:00 hrs.", label: "Argumentación Jurídica" },
+                { value: "sistema_no_jurisdiccional.jpg", text: "17:00 a 20:00 hrs.", label: "Sistema no Jurisdiccional" }
             ],
             "ERA-A": [
-                { value: "procedimiento_responsabilidad.jpg", text: "Procedimiento de Responsabilidad", label: "Procedimiento de Responsabilidad" },
-                { value: "recursos_medios_defensa.jpg", text: "Recursos y Medios de Defensa", label: "Recursos y Medios de Defensa" }
+                { value: "procedimiento_responsabilidad.jpg", text: "17:00 a 20:00 hrs.", label: "Procedimiento de Responsabilidad" },
+                { value: "recursos_medios_defensa.jpg", text: "17:00 a 20:00 hrs.", label: "Recursos y Medios de Defensa" }
             ],
             "ERA-B": [
-                { value: "fiscalizacion_recursos.jpg", text: "Fiscalización de Recursos", label: "Fiscalización de Recursos" },
-                { value: "procedimiento_responsabilidad_administrativa.jpg", text: "Procedimiento de Responsabilidad Administrativa", label: "Procedimiento de Responsabilidad Administrativa" }
+                { value: "fiscalizacion_recursos.jpg", text: "07:00 a 10:00 hrs.", label: "Fiscalización de Recursos" },
+                { value: "procedimiento_responsabilidad_administrativa.jpg", text: "07:00 a 10:00 hrs.", label: "Procedimiento de Responsabilidad Administrativa" }
             ]
         };
-
-        // Actualizar la fecha
+        // Actualizar la fecha (solo para la ventana emergente)
         function updateDate() {
-            const dateBox = document.getElementById('date-box');
             const now = new Date();
             const monthNames = [
                 "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -157,69 +160,13 @@
             ];
             const month = monthNames[now.getMonth()]; // Obtiene el nombre del mes
             const day = now.getDate(); // Obtiene el día del mes
-            dateBox.textContent = `${month} ${day}`; // Formato: "Mes Día"
+            return `${month} ${day}`; // Formato: "Mes Día"
         }
-        updateDate();
-        setInterval(updateDate, 60000);
-
-        // Manejar cambios en el primer menú principal
-        const mainSelect1 = document.getElementById('main-select-1');
-        const secondarySelect1 = document.getElementById('secondary-select-1');
-
-        mainSelect1.addEventListener('change', function() {
-            const selectedCategory = this.value;
-
-            if (selectedCategory) {
-                // Habilitar y actualizar el menú secundario
-                secondarySelect1.disabled = false;
-                secondarySelect1.innerHTML = '<option value="">Selecciona una opción</option>';
-
-                menuOptions1[selectedCategory].forEach(option => {
-                    const newOption = document.createElement('option');
-                    newOption.value = option.value;
-                    newOption.textContent = option.label;
-                    newOption.setAttribute('data-text', option.text);
-                    secondarySelect1.appendChild(newOption);
-                });
-            } else {
-                // Deshabilitar el menú secundario si no hay selección
-                secondarySelect1.disabled = true;
-                secondarySelect1.innerHTML = '<option value="">Selecciona una opción</option>';
-            }
-        });
-
-        // Manejar cambios en el segundo menú principal
-        const mainSelect2 = document.getElementById('main-select-2');
-        const secondarySelect2 = document.getElementById('secondary-select-2');
-
-        mainSelect2.addEventListener('change', function() {
-            const selectedCategory = this.value;
-
-            if (selectedCategory) {
-                // Habilitar y actualizar el menú secundario
-                secondarySelect2.disabled = false;
-                secondarySelect2.innerHTML = '<option value="">Selecciona una opción</option>';
-
-                menuOptions2[selectedCategory].forEach(option => {
-                    const newOption = document.createElement('option');
-                    newOption.value = option.value;
-                    newOption.textContent = option.label;
-                    newOption.setAttribute('data-text', option.text);
-                    secondarySelect2.appendChild(newOption);
-                });
-            } else {
-                // Deshabilitar el menú secundario si no hay selección
-                secondarySelect2.disabled = true;
-                secondarySelect2.innerHTML = '<option value="">Selecciona una opción</option>';
-            }
-        });
-
         // Función para abrir la ventana emergente
         function openPopup(selectedImage, selectedText) {
             if (selectedImage) {
                 // Abrir una nueva ventana con tamaño específico (975x555) y sin redimensionar
                 const newWindow = window.open('', '_blank', 'width=975,height=555,resizable=yes');
-
                 // Construir el contenido de la nueva ventana
                 newWindow.document.write(`
                     <!DOCTYPE html>
@@ -255,16 +202,16 @@
                                 font-size: 2.0vw; /* Tamaño de fuente responsive */
                             }
                             .date-box {
-                                bottom: 80px;
-                                left: 60px;
+                                bottom: 10vh;
+                                left: 5vw;
                             }
                             .additional-box {
-                                bottom: 25px;
-                                left: 20px;
+                                bottom: 5vh;
+                                left: 2vw;
                             }
                             .waiting-box {
-                                bottom: 70px;
-                                right: 60px;
+                                bottom: 10vh;
+                                right: 5vw;
                                 animation: blink 3s infinite;
                             }
                             @keyframes blink {
@@ -279,7 +226,7 @@
                     </head>
                     <body>
                         <div class="container">
-                            <div class="text-box date-box">${new Date().toLocaleDateString('es-ES', { month: 'long', day: 'numeric' })}</div>
+                            <div class="text-box date-box">${updateDate()}</div>
                             <div class="text-box additional-box">${selectedText}</div>
                             <div class="text-box waiting-box">Comenzamos en breve...</div>
                         </div>
@@ -289,18 +236,58 @@
                 newWindow.document.close();
             }
         }
-
         // Manejar cambios en los menús secundarios
-        secondarySelect1.addEventListener('change', function() {
+        document.getElementById('secondary-select-1').addEventListener('change', function() {
             const selectedImage = this.value; // Obtiene el valor seleccionado (imagen)
             const selectedText = this.options[this.selectedIndex].getAttribute('data-text'); // Obtiene el texto asociado
             openPopup(selectedImage, selectedText);
         });
-
-        secondarySelect2.addEventListener('change', function() {
+        document.getElementById('secondary-select-2').addEventListener('change', function() {
             const selectedImage = this.value; // Obtiene el valor seleccionado (imagen)
             const selectedText = this.options[this.selectedIndex].getAttribute('data-text'); // Obtiene el texto asociado
             openPopup(selectedImage, selectedText);
+        });
+        // Manejar cambios en el primer menú principal
+        document.getElementById('main-select-1').addEventListener('change', function() {
+            const selectedCategory = this.value;
+            const secondarySelect1 = document.getElementById('secondary-select-1');
+            if (selectedCategory) {
+                // Habilitar y actualizar el menú secundario
+                secondarySelect1.disabled = false;
+                secondarySelect1.innerHTML = '<option value="">Selecciona una opción</option>';
+                menuOptions1[selectedCategory].forEach(option => {
+                    const newOption = document.createElement('option');
+                    newOption.value = option.value;
+                    newOption.textContent = option.label;
+                    newOption.setAttribute('data-text', option.text);
+                    secondarySelect1.appendChild(newOption);
+                });
+            } else {
+                // Deshabilitar el menú secundario si no hay selección
+                secondarySelect1.disabled = true;
+                secondarySelect1.innerHTML = '<option value="">Selecciona una opción</option>';
+            }
+        });
+        // Manejar cambios en el segundo menú principal
+        document.getElementById('main-select-2').addEventListener('change', function() {
+            const selectedCategory = this.value;
+            const secondarySelect2 = document.getElementById('secondary-select-2');
+            if (selectedCategory) {
+                // Habilitar y actualizar el menú secundario
+                secondarySelect2.disabled = false;
+                secondarySelect2.innerHTML = '<option value="">Selecciona una opción</option>';
+                menuOptions2[selectedCategory].forEach(option => {
+                    const newOption = document.createElement('option');
+                    newOption.value = option.value;
+                    newOption.textContent = option.label;
+                    newOption.setAttribute('data-text', option.text);
+                    secondarySelect2.appendChild(newOption);
+                });
+            } else {
+                // Deshabilitar el menú secundario si no hay selección
+                secondarySelect2.disabled = true;
+                secondarySelect2.innerHTML = '<option value="">Selecciona una opción</option>';
+            }
         });
     </script>
 </body>
